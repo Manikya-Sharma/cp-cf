@@ -1,26 +1,30 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
- 
+
+const char nl = '\n';
+typedef long long ll;
+typedef long double ld;
+
 int main() {
-    string n;
-    cin >> n;
-    for (int i = 0; i < n.size(); i++) {
-        if (i != 0 && n[i] >= '5')
-            n[i] = 9 - (n[i] - '0') + '0';
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    ll num;
+    cin >> num;
+    vector<int> digits;
+    while (num) {
+        digits.push_back(num % 10);
+        num /= 10;
     }
-    int flag = 0;
-    for (int i = 0; i < n.size(); i++) {
-        if (!flag && n[i] == '0')
-            continue;
-        flag = 1;
-        cout << n[i];
+    for (int i = 0; i < digits.size() - 1; i++) {
+        if (digits[i] >= 5)
+            digits[i] = 9 - digits[i];
     }
-    if (!flag) {
-        // nothing printed, it is a series of nines
-        cout << '9';
-        for (int i=0; i<n.size()-1; i++) {
-            cout << '0';
-        }
+    if (digits[digits.size() - 1] != 9 && digits[digits.size() - 1] >= 5) {
+        digits[digits.size() - 1] = 9 - digits[digits.size() - 1];
     }
+    for (int i = digits.size() - 1; i >= 0; i--) {
+        cout << digits[i];
+    }
+    cout << nl;
     return 0;
 }
