@@ -6,30 +6,32 @@ typedef long long ll;
 typedef long double ld;
 #define sz(x) int((x).size())
 
+// TODO: Do it again -> solved from tutorial
 void solution_fn() {
     int n;
     cin >> n;
-    vector<int> b(n - 1);
-    for (int i = 0; i < n - 1; i++) {
-        cin >> b[i];
-    }
     vector<int> a(n);
-    a[0] = b[0];
-    for (int i = 1; i < n - 1; i++) {
-        a[i] = b[i - 1] | b[i];
+    int min_elem = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        min_elem = min(min_elem, a[i]);
     }
-    a[n - 1] = b[n - 2];
-    for (int i = 0; i < n - 1; i++) {
-        if ((a[i] & a[i + 1]) != b[i]) {
+
+    for (int i=0; i<n; i++) {
+        if (a[i]%2 != a[0]%2) {
             cout << -1 << nl;
             return;
         }
     }
-    for (int i = 0; i < n; i++) {
-        cout << a[i] << " \n"[i == n - 1];
-    }
-}
 
+    cout << 32 << '\n';
+    cout << min_elem;
+    for (int i = 29; i >= 0; i--) {
+      cout << " " << (1 << i);
+    }
+    cout << " " << 1 << '\n';
+
+}
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
