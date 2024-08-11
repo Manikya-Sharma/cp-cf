@@ -8,28 +8,29 @@ typedef long double ld;
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
-// ref: https://codeforces.com/blog/entry/132383 
 void solution_fn() {
-    string s, t;
+    int n, k;
+    cin >> n >> k;
+    string s;
     cin >> s;
-    cin >> t;
-    int j = 0;
-    for (int i = 0; i < sz(s); i++) {
-        if (s[i] == '?') {
-            if (j < sz(t))
-                s[i] = t[j];
-            else
-                s[i] = 'j';
-        }
-        if (j < sz(t) && s[i] == t[j])
-            j++;
+    vector<int> freq(26);
+    for (auto ch : s) {
+        freq[ch - 'a']++;
     }
-    if (j < sz(t))
-        cout << "NO" << nl;
-    else {
+    int odd_vals = 0;
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] % 2 != 0)
+            odd_vals++;
+    }
+    if (k == odd_vals - 1 || k == odd_vals) {
         cout << "YES" << nl;
-        cout << s << nl;
+        return;
     }
+    if (k < odd_vals - 1) {
+        cout << "NO" << nl;
+        return;
+    }
+    cout << "YES" << nl;
 }
 
 int main() {
