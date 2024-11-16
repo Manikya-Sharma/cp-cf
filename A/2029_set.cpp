@@ -20,7 +20,20 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-void solution_fn() {}
+void solution_fn() {
+    int l, r, k;
+    cin >> l >> r >> k;
+    int start = l, end = r;
+    while (start <= end) {
+        int mid = (start + end) / 2;
+        if (mid * 1ll * k <= r) {
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+    cout << start - l << nl;
+}
 
 int main() {
     ios::sync_with_stdio(0);

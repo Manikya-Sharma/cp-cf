@@ -20,7 +20,21 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-void solution_fn() {}
+void solution_fn() {
+    int n;
+    cin >> n;
+    vi p(n);
+    for (int i = 0; i < n; i++) {
+        cin >> p[i];
+    }
+    for (int i = 0; i < n; i++) {
+        if (p[i] > i + 2 || p[i] < i) {
+            cout << "NO" << nl;
+            return;
+        }
+    }
+    cout << "YES" << nl;
+}
 
 int main() {
     ios::sync_with_stdio(0);

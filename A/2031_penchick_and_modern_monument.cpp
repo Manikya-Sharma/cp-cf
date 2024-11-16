@@ -20,7 +20,25 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-void solution_fn() {}
+void solution_fn() {
+    int n;
+    cin >> n;
+    vi a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    int max_rep = 0;
+    int rep = 0;
+    for (int i = 1; i < n; i++) {
+        if (a[i] == a[i - 1]) {
+            rep++;
+            max_rep = max(max_rep, rep);
+        } else {
+            rep = 0;
+        }
+    }
+    cout << n - max_rep - 1 << nl;
+}
 
 int main() {
     ios::sync_with_stdio(0);
