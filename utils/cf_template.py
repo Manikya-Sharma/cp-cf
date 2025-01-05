@@ -2,11 +2,9 @@ import sys
 
 file_name = "a.cpp" if len(sys.argv) == 1 else sys.argv[1] if sys.argv[1].rfind(".") != -1 else sys.argv[1]+".cpp"
 
-is_no_testcase = False
-if (len(sys.argv) > 2):
-    is_no_testcase = True
+is_no_testcase = "notc" in sys.argv
 
-with open(sys.argv[0].rstrip("cf_template.py")+"std_template.cpp") as f:
+with open(sys.argv[0].rstrip("cf_template.py")+("std_template.cpp" if not is_no_testcase else "std_notc_template.cpp")) as f:
     content = f.read()
 
 with open(file_name, "w") as f:
