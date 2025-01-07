@@ -20,7 +20,28 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-void solution_fn() {}
+void solution_fn() {
+    int n;
+    cin >> n;
+    vi a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    ll odd_sum = 0, even_sum = 0;
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 0) {
+            odd_sum += a[i];
+        } else {
+            even_sum += a[i];
+        }
+    }
+    if (even_sum % (n / 2) == 0 && odd_sum % (n / 2 + n % 2) == 0 &&
+        even_sum / (n / 2) == odd_sum / (n / 2 + n % 2)) {
+        cout << "Yes" << nl;
+    } else {
+        cout << "No" << nl;
+    }
+}
 
 int main() {
     ios::sync_with_stdio(0);
