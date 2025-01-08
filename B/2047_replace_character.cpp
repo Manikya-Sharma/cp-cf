@@ -20,7 +20,29 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-void solution_fn() {}
+void solution_fn() {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    map<char, pair<int, int>> mp;
+    for (int i = 0; i < n; i++) {
+        char ch = s[i];
+        mp[ch].first++;
+        mp[ch].second = i;
+    }
+
+    vector<pair<int, int>> v;
+    for (auto& [_, y] : mp) {
+        v.push_back(y);
+    }
+
+    sort(v.begin(), v.end());
+    s[v[0].second] = s[v.back().second];
+
+    cout << s << nl;
+}
 
 int main() {
     ios::sync_with_stdio(0);

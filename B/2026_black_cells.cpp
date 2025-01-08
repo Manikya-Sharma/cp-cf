@@ -8,7 +8,26 @@ typedef long double ld;
 typedef vector<int> vi;
 typedef vector<vector<int>> vvi;
 
-// TODO: WA
+bool is_valid(vector<ll>& a, ll k) {
+    int n = sz(a);
+    bool b_color = false;
+    int i = 0;
+    while (i < n - 1) {
+        if (a[i + 1] - a[i] <= k) {
+            i += 2;
+        } else {
+            if (b_color)
+                return false;
+            b_color = true;
+            i++;
+        }
+    }
+    if (i == n-1) {
+        return !b_color;
+    }
+    return true;
+}
+
 void solution_fn() {
     int n;
     cin >> n;
@@ -16,22 +35,21 @@ void solution_fn() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    if (n == 1) {
-        cout << 1 << nl;
-        return;
-    }
-    if (n == 2) {
-        cout << a[1] - a[0] << nl;
-        return;
-    }
-    priority_queue<ll> pq;
+
+    ll start = 1;
+    ll end = 0;
     for (int i = 0; i < n - 1; i++) {
-        pq.push(a[i + 1] - a[i]);
+        end = max(end, a[i + 1] - a[i]);
     }
-    for (int i = 0; i < (n % 2 == 1 ? n / 2 : n / 2 - 1); i++) {
-        pq.pop();
+    while (start <= end) {
+        ll mid = start + (end - start) / 2;
+        if (is_valid(a, mid)) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
     }
-    cout << pq.top() << nl;
+    cout << start << nl;
 }
 
 int main() {

@@ -8,7 +8,6 @@ typedef long long ll;
 typedef long double ld;
 #define sz(x) int((x).size())
 typedef vector<int> vi;
-typedef vector<vector<int>> vvi;
 
 /* *** DEBUG *** */
 
