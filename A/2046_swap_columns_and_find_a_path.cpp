@@ -19,31 +19,27 @@ typedef vector<int> vi;
 
 /* *** SOLUTION *** */
 
-// TODO: WA
 void solution_fn() {
-    int n, x;
-    cin >> n >> x;
-    vi a(n);
+    int n;
+    cin >> n;
+    vi a(n), b(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> mp;
-    for (int i=0; i<n; i++) {
-        mp[a[i]]++;
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
     }
-    int mex = 0;
-    while (true) {
-        if (mp[mex] > 0) {
-            mex++;
-        } else if (mp[mex-x] > 1) {
-            mp[mex-x]--;
-            mp[mex]++;
-            mex++;
-        } else {
-            break;
-        }
+
+    ll score = 0;
+    for (int i = 0; i < n; i++) {
+        score += max(a[i], b[i]);
     }
-    cout << mex << nl;
+
+    int max_min = -1e9;
+    for (int i = 0; i < n; i++) {
+        max_min = max(min(a[i], b[i]), max_min);
+    }
+    cout << score + max_min << nl;
 }
 
 int main() {

@@ -19,31 +19,33 @@ typedef vector<int> vi;
 
 /* *** SOLUTION *** */
 
-// TODO: WA
 void solution_fn() {
-    int n, x;
-    cin >> n >> x;
-    vi a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    map<int, int> mp;
-    for (int i=0; i<n; i++) {
-        mp[a[i]]++;
-    }
-    int mex = 0;
-    while (true) {
-        if (mp[mex] > 0) {
-            mex++;
-        } else if (mp[mex-x] > 1) {
-            mp[mex-x]--;
-            mp[mex]++;
-            mex++;
+    int n, a, b;
+    cin >> n >> a >> b;
+
+    bool alice = true;
+    while (!((a == 1 && b == 2) || (a == 2 && b == 1) ||
+             (a == n && b == n - 1) || (a == n - 1 && b == n))) {
+        if (alice) {
+            if (a < b) {
+                a++;
+            } else {
+                a--;
+            }
         } else {
-            break;
+            if (b < a) {
+                b++;
+            } else {
+                b--;
+            }
         }
+        alice = !alice;
     }
-    cout << mex << nl;
+    if (alice) {
+        cout << "No" << nl;
+    } else {
+        cout << "Yes" << nl;
+    }
 }
 
 int main() {

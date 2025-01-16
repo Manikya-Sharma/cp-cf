@@ -20,42 +20,43 @@ typedef vector<vector<int>> vvi;
 
 /* *** SOLUTION *** */
 
-// TODO: TLE
 void solution_fn() {
     int n;
     cin >> n;
     vector<pair<int, int>> vpi(n);
-    map<int, set<int>> mp;
+    vector<int> freq(2 * n + 1, 0);
     for (int i = 0; i < n; i++) {
-        int x, y;
-        cin >> x >> y;
-        vpi[i] = {x, y};
-        if (x == y) {
-            mp[x].insert(i);
+        cin >> vpi[i].first;
+        cin >> vpi[i].second;
+        if (vpi[i].first == vpi[i].second) {
+            freq[vpi[i].first]++;
         }
     }
-    string ans(n, '1');
+    vector<int> prefix(2 * n + 1);
+    prefix[0] = 0;
+    prefix[0] = 0;
+    for (int i = 1; i < 2 * n + 1; i++) {
+        prefix[i] = prefix[i - 1] + (freq[i] > 0);
+    }
     for (int i = 0; i < n; i++) {
         auto [l, r] = vpi[i];
-        bool flag = false;
-        for (int j = l; j <= r; j++) {
-            if (mp[j].find(i) == mp[j].end()) {
-                if (mp[j].empty()) {
-                    flag = true;
-                    break;
-                }
+        if (l == r) {
+            if (freq[l] > 1) {
+                cout << 0;
             } else {
-                if (mp[j].size() == 1) {
-                    flag = true;
-                    break;
-                }
+                cout << 1;
             }
+            continue;
         }
-        if (!flag) {
-            ans[i] = '0';
+        int size = r - l + 1;
+        int ex = prefix[r] - prefix[l - 1];
+        if (ex >= size) {
+            cout << 0;
+        } else {
+            cout << 1;
         }
     }
-    cout << ans << nl;
+    cout << nl;
 }
 
 int main() {

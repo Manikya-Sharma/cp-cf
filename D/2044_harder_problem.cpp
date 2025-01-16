@@ -19,31 +19,37 @@ typedef vector<int> vi;
 
 /* *** SOLUTION *** */
 
-// TODO: WA
 void solution_fn() {
-    int n, x;
-    cin >> n >> x;
+    int n;
+    cin >> n;
     vi a(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> mp;
-    for (int i=0; i<n; i++) {
-        mp[a[i]]++;
+    vi b(n, -1);
+    set<int> vis;
+    for (int i = 0; i < n; i++) {
+        if (!vis.count(a[i]))
+            b[i] = a[i];
+        vis.insert(a[i]);
     }
-    int mex = 0;
-    while (true) {
-        if (mp[mex] > 0) {
-            mex++;
-        } else if (mp[mex-x] > 1) {
-            mp[mex-x]--;
-            mp[mex]++;
-            mex++;
-        } else {
-            break;
+    set<int> st;
+    for (int i = 1; i <= n; i++) {
+        st.insert(i);
+    }
+    for (int i = 0; i < n; i++) {
+        if (b[i] != -1)
+            st.erase(b[i]);
+    }
+    for (int i = 0; i < n; i++) {
+        if (b[i] == -1) {
+            b[i] = *st.begin();
+            st.erase(st.begin());
         }
     }
-    cout << mex << nl;
+    for (int i = 0; i < n; i++) {
+        cout << b[i] << " \n"[i == n - 1];
+    }
 }
 
 int main() {

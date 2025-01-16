@@ -19,31 +19,18 @@ typedef vector<int> vi;
 
 /* *** SOLUTION *** */
 
-// TODO: WA
+ll solve(int n) {
+    if (n == 1)
+        return 1;
+    if (n == 2)
+        return 2;
+    return solve(n / 2 - (n % 2 == 0)) + 1;
+}
+
 void solution_fn() {
-    int n, x;
-    cin >> n >> x;
-    vi a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    map<int, int> mp;
-    for (int i=0; i<n; i++) {
-        mp[a[i]]++;
-    }
-    int mex = 0;
-    while (true) {
-        if (mp[mex] > 0) {
-            mex++;
-        } else if (mp[mex-x] > 1) {
-            mp[mex-x]--;
-            mp[mex]++;
-            mex++;
-        } else {
-            break;
-        }
-    }
-    cout << mex << nl;
+    ll n;
+    cin >> n;
+    cout << solve(n) << nl;
 }
 
 int main() {
