@@ -39,6 +39,7 @@ with open(
 data = f"""/* ***  METADATA
 PROBLEM: {question}
 ON: {date.today()}
+BY: Manikya
 *** */
 
 {template_data}

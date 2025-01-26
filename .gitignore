@@ -1,4 +1,5 @@
 *.txt
 *.out
-in
+*.in
 out
+exp
