@@ -16,19 +16,26 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-input_file = "a.cpp" if len(sys.argv) == 1 else sys.argv[1]
+if len(sys.argv) == 1:
+    print(bcolors.FAIL + "Which part to debug?" + bcolors.ENDC)
+    exit(1)
+
+part = sys.argv[1]
+
+input_file = f"{part}.cpp"
+output_file = f"{part}.out"
 print(f"{bcolors.BOLD}Executing {input_file}{bcolors.ENDC}", file=sys.stderr)
 
 try:
-    f = open("in", "r")
+    f = open(f"{part}.in", "r")
 except:
     print(
-        f'{bcolors.FAIL}ERROR: Enter the testcases in "in"{bcolors.FAIL}',
+        f'{bcolors.FAIL}ERROR: Enter the testcases in "{part}.in"{bcolors.FAIL}',
         file=sys.stderr,
     )
 else:
     status = os.system(
-        f"g++ -Wall -Wextra -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -DLOCAL -g -o sample_output.out {input_file}"
+        f"g++ -Wall -Wextra -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -DLOCAL -g -o {output_file} {input_file}"
     )
     if status == 0:
         print(f"{bcolors.BOLD}Compiled successfuly\n{bcolors.ENDC}", file=sys.stderr)
@@ -36,7 +43,7 @@ else:
         print(f"{bcolors.FAIL}Status returned: {status}{bcolors.ENDC}", file=sys.stderr)
     try:
         start = time.time()
-        output = subprocess.check_output([f"./sample_output.out < in"], shell=True)
+        output = subprocess.check_output([f"./{output_file} < {part}.in"], shell=True)
         end = time.time()
     except subprocess.CalledProcessError as err:
         print(err)
