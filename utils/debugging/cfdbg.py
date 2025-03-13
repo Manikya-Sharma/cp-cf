@@ -20,7 +20,7 @@ if len(sys.argv) == 1:
     print(bcolors.FAIL + "Which part to debug?" + bcolors.ENDC)
     exit(1)
 
-part = sys.argv[1]
+part = sys.argv[1].rstrip(".")
 
 input_file = f"{part}.cpp"
 output_file = f"{part}.out"
@@ -34,9 +34,9 @@ except:
         file=sys.stderr,
     )
 else:
-    status = os.system(
-        f"g++ -Wall -Wextra -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -DLOCAL -g -o {output_file} {input_file}"
-    )
+    flags = "-Wall -Wextra -Wconversion -O2 -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector"
+    local = "-DLOCAL"
+    status = os.system(f"g++ {flags} {local} -g -o {output_file} {input_file}")
     if status == 0:
         print(f"{bcolors.BOLD}Compiled successfuly\n{bcolors.ENDC}", file=sys.stderr)
     else:

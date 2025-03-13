@@ -19,13 +19,13 @@ class bcolors:
 if len(sys.argv) == 1:
     print(bcolors.FAIL + "Question number not provided" + bcolors.ENDC)
     exit(1)
-if len(sys.argv) < 2:
-    print(bcolors.FAIL + "Question name not provided" + bcolors.ENDC)
-    exit(1)
+if len(sys.argv) >= 3:
+    question = f"{os.getcwd().split('/')[-1]}_{sys.argv[1]}_{sys.argv[2]}"
+else:
+    question = None
 
 file_name = sys.argv[1] + ".cpp"
-question = f"{os.getcwd().split('/')[-1]}_{sys.argv[1]}_{sys.argv[2]}"
-is_no_testcase = ("notc" in sys.argv) or (os.environ.get("NOTC") == 1)
+is_no_testcase = ("notc" in sys.argv) or (os.environ.get("NOTC") == '1')
 
 # Get all required data for template
 path = sys.argv[0].rstrip("cf_template.py")
@@ -36,16 +36,13 @@ with open(
 ) as f:
     main_data = f.read()
 
-data = f"""/* ***  METADATA
-PROBLEM: {question}
+data = f"""/* ***{"" if question is None else f" PROBLEM: {question}"}
 ON: {date.today()}
 BY: Manikya
 *** */
 
 {template_data}
-{main_data}
-
-"""
+{main_data} """
 
 with open(file_name, "w") as f:
     f.write(data)
