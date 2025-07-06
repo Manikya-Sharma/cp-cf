@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1610_a_anti_light_cell_guessing
+ON: 2025-05-19
 BY: Manikya
 *** */
 
@@ -24,19 +24,15 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int n, m;
+    cin >> n >> m;
+    if (n == 1 && m == 1) {
+        cout << 0 << nl;
+    } else if (n == 1 || m == 1) {
+        cout << 1 << nl;
+    } else {
+        cout << 2 << nl;
     }
-    cout << count << nl;
 }
 
 int main() {
@@ -49,3 +45,4 @@ int main() {
     }
     return 0;
 }
+

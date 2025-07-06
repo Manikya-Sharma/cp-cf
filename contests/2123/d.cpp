@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2123_d_binary_string_battle
+ON: 2025-07-01
 BY: Manikya
 *** */
 
@@ -24,19 +24,19 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
     string s;
     cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int cnt = 0;
+    for (auto &ch : s) {
+        cnt += ch == '1';
     }
-    cout << count << nl;
+    if (k >= (n % 2 == 0 ? n / 2 + 1 : (n + 1) / 2) || cnt <= k) {
+        cout << "Alice" << nl;
+    } else {
+        cout << "Bob" << nl;
+    }
 }
 
 int main() {
@@ -49,3 +49,4 @@ int main() {
     }
     return 0;
 }
+

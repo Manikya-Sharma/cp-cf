@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1617_b_gcd_problem
+ON: 2025-05-19
 BY: Manikya
 *** */
 
@@ -26,17 +26,14 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
+    for (int i = 2; i < n - 1; i++) {
+        int g = gcd(i, n - i - 1);
+        if (g == 1) {
+            cout << i << ' ' << n - i - 1 << ' ' << 1 << nl;
+            return;
         }
     }
-    cout << count << nl;
+    assert(false);
 }
 
 int main() {

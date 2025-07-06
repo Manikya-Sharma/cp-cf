@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2120_a_square_of_rectangles
+ON: 2025-06-22
 BY: Manikya
 *** */
 
@@ -24,19 +24,19 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int l1, b1, l2, b2, l3, b3;
+    cin >> l1 >> b1 >> l2 >> b2 >> l3 >> b3;
+    if (l1 > b1) {
+        swap(l1, b1);
+        swap(l2, b2);
+        swap(l3, b3);
     }
-    cout << count << nl;
+    if ((l2 == l3 && b2 + b3 == b1 && l1 + l2 == b1) ||
+        (b1 == b2 && b2 == b3 && l1 + l2 + l3 == b1)) {
+        cout << "YES" << nl;
+    } else {
+        cout << "NO" << nl;
+    }
 }
 
 int main() {
@@ -49,3 +49,4 @@ int main() {
     }
     return 0;
 }
+

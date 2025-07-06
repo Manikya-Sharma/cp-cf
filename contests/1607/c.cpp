@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1607_c_minimum_extraction
+ON: 2025-05-21
 BY: Manikya
 *** */
 
@@ -26,17 +26,18 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    sort(a.begin(), a.end());
+    ll curr = 0;
+    ll ans = -1e9;
+    for (int i = 0; i < n; i++) {
+        ans = max(ans, a[i] - curr);
+        curr += a[i] - curr;
+    }
+    cout << ans << nl;
 }
 
 int main() {
@@ -49,3 +50,4 @@ int main() {
     }
     return 0;
 }
+

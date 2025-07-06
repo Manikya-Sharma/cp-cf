@@ -17,7 +17,7 @@ class bcolors:
 
 # Take input
 if len(sys.argv) == 1:
-    print(bcolors.FAIL + "Question number not provided" + bcolors.ENDC)
+    print(bcolors.FAIL + "Part name not provided" + bcolors.ENDC)
     exit(1)
 if len(sys.argv) >= 3:
     question = f"{os.getcwd().split('/')[-1]}_{sys.argv[1]}_{sys.argv[2]}"
@@ -25,7 +25,9 @@ else:
     question = None
 
 file_name = sys.argv[1] + ".cpp"
-is_no_testcase = ("notc" in sys.argv) or (os.environ.get("NOTC") == '1')
+input_name = sys.argv[1] + ".in"
+exp_name = sys.argv[1] + ".exp"
+is_no_testcase = ("notc" in sys.argv) or (os.environ.get("NOTC") == "1")
 
 # Get all required data for template
 path = sys.argv[0].rstrip("cf_template.py")
@@ -46,5 +48,7 @@ BY: Manikya
 
 with open(file_name, "w") as f:
     f.write(data)
+open(input_name, "w").close()
+open(exp_name, "w").close()
 
 print(f"{bcolors.BOLD}Template created successfully at {file_name}{bcolors.ENDC}")

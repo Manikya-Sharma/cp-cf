@@ -2,7 +2,6 @@ import sys
 import os
 import subprocess
 import time
-from pathlib import Path
 
 
 class bcolors:
@@ -71,7 +70,7 @@ def run(output_file, part, expected_file, has_exp):
                 exp = f.read()
             diff_show(output.decode(), exp)
         print(
-            f"{bcolors.BOLD}Time taken: {(end-start):.5f} s{bcolors.ENDC}",
+            f"{bcolors.BOLD}Time taken: {(end - start):.5f} s{bcolors.ENDC}",
             file=sys.stderr,
         )
 
@@ -83,9 +82,10 @@ if len(sys.argv) == 1:
 part = sys.argv[1].rstrip(".")
 
 input_file = f"{part}.cpp"
-output_file = f"{part}.out"
+output_file = f"x_{part}.out"
 expected_file = f"{part}.exp"
-has_exp = Path(expected_file).exists()
+with open(expected_file, "r") as f:
+    has_exp = len(f.read()) > 0
 
 print(
     f"{bcolors.BOLD}Executing {input_file} {'with diff' if has_exp else ''}{bcolors.ENDC}",

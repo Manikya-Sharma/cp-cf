@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2113_b_good_start
+ON: 2025-06-15
 BY: Manikya
 *** */
 
@@ -24,19 +24,19 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int w, h, a, b;
+    cin >> w >> h >> a >> b;
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+
+    int x_dist = max(x1, x2) - (min(x1, x2) + a);
+    int y_dist = min(y1, y2) + b - max(y1, y2);
+
+    if ((x_dist % a == 0 && x1 != x2) || (y_dist % b == 0 && y1 != y2)) {
+        cout << "YES" << nl;
+    } else {
+        cout << "NO" << nl;
     }
-    cout << count << nl;
 }
 
 int main() {
@@ -49,3 +49,4 @@ int main() {
     }
     return 0;
 }
+

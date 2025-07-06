@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1650_b_div_+_mod
+ON: 2025-05-20
 BY: Manikya
 *** */
 
@@ -24,19 +24,14 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int l, r, a;
+    cin >> l >> r >> a;
+    int s2 = r / a;
+    int ans = s2 + r % a;
+    if (l / a < r / a) {
+        ans = max(ans, r / a - 1 + a - 1);
     }
-    cout << count << nl;
+    cout << ans << nl;
 }
 
 int main() {
@@ -49,3 +44,4 @@ int main() {
     }
     return 0;
 }
+

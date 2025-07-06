@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2123_b_tournament
+ON: 2025-07-01
 BY: Manikya
 *** */
 
@@ -24,19 +24,22 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    int n, j, k;
+    cin >> n >> j >> k;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    if (k == 1) {
+        int val = a[j - 1];
+        if (val == *max_element(a.begin(), a.end())) {
+            cout << "YES" << nl;
+        } else {
+            cout << "NO" << nl;
+        }
+    } else {
+        cout << "YES" << nl;
+    }
 }
 
 int main() {
@@ -49,3 +52,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2110_b_down_with_brackets
+ON: 2025-05-24
 BY: Manikya
 *** */
 
@@ -24,19 +24,21 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
     string s;
     cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
+    int cnt = 0;
+    for (int i = 0; i < sz(s); i++) {
+        if (s[i] == '(') {
+            cnt++;
         } else {
-            count++;
+            cnt--;
+        }
+        if (cnt == 0 && i != sz(s) - 1) {
+            cout << "YES" << nl;
+            return;
         }
     }
-    cout << count << nl;
+    cout << "NO" << nl;
 }
 
 int main() {
@@ -49,3 +51,4 @@ int main() {
     }
     return 0;
 }
+

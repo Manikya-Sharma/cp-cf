@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2117_a_false_alarm
+ON: 2025-06-08
 BY: Manikya
 *** */
 
@@ -24,19 +24,32 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
+    int n, x;
+    cin >> n >> x;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    bool enabled = false;
+    bool flag = false;
     int count = 0;
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
+        if (!(a[i] == 0 || (enabled && a[i] == 1))) {
+            if (flag) {
+                cout << "NO" << nl;
+                return;
+            } else if (!enabled) {
+                enabled = true;
+            }
+        }
+        if (enabled)
             count++;
+        if (count == x) {
+            flag = true;
+            enabled = false;
         }
     }
-    cout << count << nl;
+    cout << "YES" << nl;
 }
 
 int main() {
@@ -49,3 +62,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1666_d_deletive_editing
+ON: 2025-05-20
 BY: Manikya
 *** */
 
@@ -24,19 +24,27 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
+    string a, b;
+    cin >> a >> b;
+    int i = sz(a) - 1, j = sz(b) - 1;
+    set<char> removed;
+    while (i >= 0 && j >= 0) {
+        if (removed.count(b[j])) {
+            cout << "NO" << nl;
+            return;
         }
+        if (a[i] == b[j]) {
+            j--;
+        } else {
+            removed.insert(a[i]);
+        }
+        i--;
     }
-    cout << count << nl;
+    if (j < 0) {
+        cout << "YES" << nl;
+    } else {
+        cout << "NO" << nl;
+    }
 }
 
 int main() {
@@ -49,3 +57,4 @@ int main() {
     }
     return 0;
 }
+

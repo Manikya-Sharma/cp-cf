@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1692_e_binary_deque
+ON: 2025-05-24
 BY: Manikya
 *** */
 
@@ -24,19 +24,29 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    int n, x;
+    cin >> n >> x;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
+        cin >> a[i];
+    }
+    map<int, int> mp;
+    mp[0] = -1;
+    int sum = 0;
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        sum += a[i];
+        if (!mp.count(sum))
+            mp[sum] = i;
+        if (mp.count(sum - x)) {
+            ans = max(ans, i - mp[sum - x]);
         }
     }
-    cout << count << nl;
+    if (ans == 0 && sum != x) {
+        cout << -1 << nl;
+    } else {
+        cout << n - ans << nl;
+    }
 }
 
 int main() {
@@ -49,3 +59,4 @@ int main() {
     }
     return 0;
 }
+

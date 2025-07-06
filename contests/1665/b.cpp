@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1665_b_array_cloning_technique
+ON: 2025-05-20
 BY: Manikya
 *** */
 
@@ -26,17 +26,31 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    map<int, int> freq;
+    for (int i = 0; i < n; i++) {
+        freq[a[i]]++;
+    }
+    if (sz(freq) == 1) {
+        cout << 0 << nl;
+        return;
+    }
+    int max_freq = 0;
+    for (auto &[_, f] : freq) {
+        max_freq = max(max_freq, f);
+    }
+    int ans = n - max_freq;
+    n -= max_freq;
+    int temp = max_freq;
+    while (n > 0) {
+        n -= temp;
+        temp *= 2;
+        ans++;
+    }
+    cout << ans << nl;
 }
 
 int main() {
@@ -49,3 +63,4 @@ int main() {
     }
     return 0;
 }
+

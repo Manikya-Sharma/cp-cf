@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2113_a_shashlinks
+ON: 2025-06-15
 BY: Manikya
 *** */
 
@@ -23,20 +23,18 @@ typedef long double ld;
 
 /* *** SOLUTION *** */
 
+// TODO: Variant?
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int k, a, b, x, y;
+    cin >> k >> a >> b >> x >> y;
+    if (x > y) {
+        swap(x, y);
+        swap(a, b);
     }
-    cout << count << nl;
+    int cnt1 = max(0, (k - a + x - 1) / x + ((k - a) % x == 0));
+    k -= cnt1 * x;
+    int cnt2 = max(0, (k - b + y - 1) / y) + ((k - b) % y == 0);
+    cout << cnt1 + cnt2 << nl;
 }
 
 int main() {
@@ -49,3 +47,4 @@ int main() {
     }
     return 0;
 }
+

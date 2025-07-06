@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1671_c_dolce_vita
+ON: 2025-05-22
 BY: Manikya
 *** */
 
@@ -24,19 +24,23 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    int n, x;
+    cin >> n >> x;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    sort(a.begin(), a.end());
+    ll sum = accumulate(a.begin(), a.end(), 0ll);
+    ll ans = 0;
+    ll prev = -1;
+    for (int i = n - 1; i >= 0; i--) {
+        ll curr = (x - sum >= 0) ? (x - sum) / (i + 1) : -1;
+        ans += (curr - prev) * (i + 1);
+        prev = curr;
+        sum -= a[i];
+    }
+    cout << ans << nl;
 }
 
 int main() {

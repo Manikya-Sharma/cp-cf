@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1674_d_a_b_c_sort
+ON: 2025-05-23
 BY: Manikya
 *** */
 
@@ -26,17 +26,24 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    vector<int> ans;
+    for (int i = n - 1; i > 0; i -= 2) {
+        ans.push_back(max(a[i], a[i - 1]));
+        ans.push_back(min(a[i], a[i - 1]));
+    }
+    if (n % 2 == 1) {
+        ans.push_back(a[0]);
+    }
+    reverse(ans.begin(), ans.end());
+    if (is_sorted(ans.begin(), ans.end())) {
+        cout << "YES" << nl;
+    } else {
+        cout << "NO" << nl;
+    }
 }
 
 int main() {
@@ -49,3 +56,4 @@ int main() {
     }
     return 0;
 }
+

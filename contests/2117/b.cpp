@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2117_b_shrink
+ON: 2025-06-08
 BY: Manikya
 *** */
 
@@ -26,17 +26,18 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> ans(n);
+    int l = n / 2 - 1, r = n / 2;
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
+        if (i % 2 == 0) {
+            ans[r++] = n - i;
         } else {
-            count++;
+            ans[l--] = n - i;
         }
     }
-    cout << count << nl;
+    for (int i = 0; i < n; i++) {
+        cout << ans[i] << " \n"[i == n - 1];
+    }
 }
 
 int main() {
@@ -49,3 +50,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,0 +1,64 @@
+/* *** PROBLEM: 1721_c_min_max_array_transformation
+ON: 2025-06-07
+BY: Manikya
+*** */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+/* *** TEMPLATE *** */
+
+const char nl = '\n';
+typedef long long ll;
+typedef long double ld;
+#define sz(x) int((x).size())
+
+/* *** DEBUG *** */
+
+#ifdef LOCAL
+#include "/home/manikya/programming/c/cp/cf/utils/header.h"
+#else
+#define debug(...) ;
+#endif
+
+/* *** SOLUTION *** */
+
+void solution_fn() {
+    int n;
+    cin >> n;
+    vector<int> a(n), b(n);
+    multiset<int> st;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
+        st.insert(b[i]);
+    }
+    vector<int> minx(n), maxx(n);
+    for (int i = 0; i < n; i++) {
+        minx[i] = *lower_bound(b.begin(), b.end(), a[i]) - a[i];
+    }
+    for (int i = n - 1; i >= 0; i--) {
+        maxx[i] = *st.rbegin() - a[i];
+        st.erase(st.lower_bound(a[i]));
+    }
+    for (int i = 0; i < n; i++) {
+        cout << minx[i] << " \n"[i == n - 1];
+    }
+    for (int i = 0; i < n; i++) {
+        cout << maxx[i] << " \n"[i == n - 1];
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int test_cases;
+    cin >> test_cases;
+    while (test_cases--) {
+        solution_fn();
+    }
+    return 0;
+}
+

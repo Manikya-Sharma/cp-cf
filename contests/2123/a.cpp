@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2123_a_blackboard_game
+ON: 2025-07-01
 BY: Manikya
 *** */
 
@@ -26,17 +26,11 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    if (n % 4 == 0) {
+        cout << "Bob" << nl;
+    } else {
+        cout << "Alice" << nl;
     }
-    cout << count << nl;
 }
 
 int main() {
@@ -49,3 +43,4 @@ int main() {
     }
     return 0;
 }
+

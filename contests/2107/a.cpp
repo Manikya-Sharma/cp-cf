@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2107_a_lrc_and_vip
+ON: 2025-05-18
 BY: Manikya
 *** */
 
@@ -26,17 +26,27 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
+        cin >> a[i];
+    }
+    int prev = a[0];
+    bool uniq = false;
+    for (int i = 1; i < n; i++) {
+        if (a[i] != prev) {
+            uniq = true;
+            break;
         }
     }
-    cout << count << nl;
+    if (!uniq) {
+        cout << "NO" << nl;
+    } else {
+        cout << "YES" << nl;
+        auto idx = max_element(a.begin(), a.end());
+        for (int i = 1; i <= n; i++) {
+            cout << (idx == a.begin() + i - 1) + 1 << " \n"[i == n];
+        }
+    }
 }
 
 int main() {
@@ -49,3 +59,4 @@ int main() {
     }
     return 0;
 }
+

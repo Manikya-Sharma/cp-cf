@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1612_b_special_permutation
+ON: 2025-05-19
 BY: Manikya
 *** */
 
@@ -24,19 +24,26 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+    int n, a, b;
+    cin >> n >> a >> b;
+    if (a - 1 > n / 2 || n - b > n / 2) {
+        cout << -1 << nl;
+        return;
     }
-    cout << count << nl;
+    if (a < b && (a - 1 == n / 2 || n - b == n / 2)) {
+        cout << -1 << nl;
+        return;
+    }
+    for (int i = b + 1; i <= n; i++) {
+        cout << i << ' ';
+    }
+    for (int i = a; i <= b; i++) {
+        cout << i << ' ';
+    }
+    for (int i = 1; i < a; i++) {
+        cout << i << ' ';
+    }
+    cout << nl;
 }
 
 int main() {
@@ -49,3 +56,4 @@ int main() {
     }
     return 0;
 }
+

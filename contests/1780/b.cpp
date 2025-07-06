@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1780_b_gcd_partition
+ON: 2025-05-21
 BY: Manikya
 *** */
 
@@ -26,17 +26,20 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
-        }
+        cin >> a[i];
     }
-    cout << count << nl;
+    ll sum = accumulate(a.begin(), a.end(), 0ll);
+    ll curr = a[0];
+    ll g = gcd(curr, sum - curr);
+    ll ans = g;
+    for (int i = 1; i < n - 1; i++) {
+        curr += a[i];
+        g = gcd(curr, sum - curr);
+        ans = max(ans, g);
+    }
+    cout << ans << nl;
 }
 
 int main() {
@@ -49,3 +52,4 @@ int main() {
     }
     return 0;
 }
+

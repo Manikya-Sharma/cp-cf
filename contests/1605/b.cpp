@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1605_b_reverse_sort
+ON: 2025-05-20
 BY: Manikya
 *** */
 
@@ -28,15 +28,33 @@ void solution_fn() {
     cin >> n;
     string s;
     cin >> s;
-    int count = 0;
+    int c0 = 0, c1 = 0;
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
+        c0 += s[i] == '0';
+        c1 += s[i] == '1';
+    }
+    vector<int> ans;
+    for (int i = n - 1; i >= 0; i--) {
+        if (s[i] == '0') {
+            if (n - i <= c1) {
+                ans.push_back(i);
+            }
         } else {
-            count++;
+            if (i < c0) {
+                ans.push_back(i);
+            }
         }
     }
-    cout << count << nl;
+    reverse(ans.begin(), ans.end());
+    if (sz(ans) == 0) {
+        cout << 0 << nl;
+        return;
+    }
+    cout << 1 << nl;
+    cout << sz(ans) << ' ';
+    for (int i = 0; i < sz(ans); i++) {
+        cout << ans[i] + 1 << " \n"[i == sz(ans) - 1];
+    }
 }
 
 int main() {
@@ -49,3 +67,4 @@ int main() {
     }
     return 0;
 }
+

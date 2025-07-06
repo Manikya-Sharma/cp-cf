@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 2117_d_retaliation
+ON: 2025-06-08
 BY: Manikya
 *** */
 
@@ -26,17 +26,31 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
-        } else {
-            count++;
+        cin >> a[i];
+    }
+    if (n == 1) {
+        cout << "YES" << nl;
+        return;
+    }
+    if ((2 * a[0] - a[1]) % (n + 1) != 0) {
+        cout << "NO" << nl;
+        return;
+    }
+    int y = (2 * a[0] - a[1]) / (n + 1);
+    int x = a[0] - y * n;
+    if (x < 0 || y < 0) {
+        cout << "NO" << nl;
+        return;
+    }
+    for (int i = 3; i <= n; i++) {
+        if (a[i - 1] - x * i - y * (n - i + 1) != 0) {
+            cout << "NO" << nl;
+            return;
         }
     }
-    cout << count << nl;
+    cout << "YES" << nl;
 }
 
 int main() {
@@ -49,3 +63,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,5 +1,5 @@
-/* *** PROBLEM: 2106_a_dr_tc
-ON: 2025-04-25
+/* *** PROBLEM: 1915_e_romantic_glasses
+ON: 2025-05-01
 BY: Manikya
 *** */
 
@@ -26,17 +26,27 @@ typedef long double ld;
 void solution_fn() {
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    int count = 0;
+    vector<int> a(n);
     for (int i = 0; i < n; i++) {
-        if (s[i] == '1') {
-            count += n - 1;
+        cin >> a[i];
+    }
+    vector<ll> prefix(n + 1, 0);
+    for (int i = 1; i <= n; i++) {
+        if (i % 2 == 0) {
+            prefix[i] = prefix[i - 1] - a[i - 1];
         } else {
-            count++;
+            prefix[i] = prefix[i - 1] + a[i - 1];
         }
     }
-    cout << count << nl;
+    set<ll> st;
+    for (auto &elem : prefix) {
+        if (st.count(elem)) {
+            cout << "YES" << nl;
+            return;
+        }
+        st.insert(elem);
+    }
+    cout << "NO" << nl;
 }
 
 int main() {
@@ -49,3 +59,4 @@ int main() {
     }
     return 0;
 }
+
