@@ -2,5 +2,6 @@
 *.out
 *.in
 *.log
+*.exp
 out
 exp

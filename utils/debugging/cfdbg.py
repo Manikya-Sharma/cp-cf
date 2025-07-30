@@ -84,8 +84,12 @@ part = sys.argv[1].rstrip(".")
 input_file = f"{part}.cpp"
 output_file = f"x_{part}.out"
 expected_file = f"{part}.exp"
-with open(expected_file, "r") as f:
-    has_exp = len(f.read()) > 0
+try:
+    with open(expected_file, "r") as f:
+        has_exp = len(f.read()) > 0
+except FileNotFoundError:
+    print(f"{bcolors.WARNING}No expected file found{bcolors.ENDC}", file=sys.stderr)
+    has_exp = False
 
 print(
     f"{bcolors.BOLD}Executing {input_file} {'with diff' if has_exp else ''}{bcolors.ENDC}",
