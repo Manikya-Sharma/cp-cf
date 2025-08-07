@@ -1,5 +1,5 @@
-/* *** PROBLEM: 1899_d_yarik_and_musical_notes
-ON: 2025-04-22
+/* *** PROBLEM: 1753_a1_make_nonzero_sum_(easy_version)
+ON: 2025-08-05
 BY: Manikya
 *** */
 
@@ -30,19 +30,23 @@ void solution_fn() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> f;
-    for (auto& elem : a) {
-        f[elem]++;
+    if (accumulate(a.begin(), a.end(), 0) % 2 != 0) {
+        cout << -1 << nl;
+        return;
     }
-    ll ans = 0;
-    for (auto& [x, y] : f) {
-        if (x == 1 || x == 2)
-            continue;
-        ans += y * 1ll * (y - 1) / 2;
+    vector<pair<int, int>> ans;
+    for (int i = 0; i < n - 1; i += 2) {
+        if (a[i] == a[i + 1]) {
+            ans.push_back({i + 1, i + 2});
+        } else {
+            ans.push_back({i + 1, i + 1});
+            ans.push_back({i + 2, i + 2});
+        }
     }
-    ll x = f[1] + f[2];
-    ans += x * (x - 1) / 2;
-    cout << ans << nl;
+    cout << sz(ans) << nl;
+    for (auto &[l, r] : ans) {
+        cout << l << " " << r << nl;
+    }
 }
 
 int main() {
@@ -55,3 +59,4 @@ int main() {
     }
     return 0;
 }
+

@@ -1,5 +1,5 @@
-/* *** PROBLEM: 1899_d_yarik_and_musical_notes
-ON: 2025-04-22
+/* *** PROBLEM: 1791_g1_teleporters (easy version)
+ON: 2025-08-01
 BY: Manikya
 *** */
 
@@ -24,24 +24,24 @@ typedef long double ld;
 /* *** SOLUTION *** */
 
 void solution_fn() {
-    int n;
-    cin >> n;
+    int n, c;
+    cin >> n >> c;
     vector<int> a(n);
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> f;
-    for (auto& elem : a) {
-        f[elem]++;
+    for (int i = 0; i < n; i++) {
+        a[i] += i + 1;
     }
-    ll ans = 0;
-    for (auto& [x, y] : f) {
-        if (x == 1 || x == 2)
-            continue;
-        ans += y * 1ll * (y - 1) / 2;
+    sort(a.begin(), a.end());
+    int cost = 0;
+    int ans = 0;
+    while (ans < n) {
+        cost += a[ans];
+        if (cost > c)
+            break;
+        ans++;
     }
-    ll x = f[1] + f[2];
-    ans += x * (x - 1) / 2;
     cout << ans << nl;
 }
 
@@ -55,3 +55,4 @@ int main() {
     }
     return 0;
 }
+

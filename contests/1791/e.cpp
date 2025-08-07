@@ -1,5 +1,5 @@
-/* *** PROBLEM: 1899_d_yarik_and_musical_notes
-ON: 2025-04-22
+/* *** PROBLEM: 1791_e_negatives_and_positives
+ON: 2025-08-01
 BY: Manikya
 *** */
 
@@ -30,18 +30,25 @@ void solution_fn() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> f;
-    for (auto& elem : a) {
-        f[elem]++;
-    }
+    sort(a.begin(), a.end());
     ll ans = 0;
-    for (auto& [x, y] : f) {
-        if (x == 1 || x == 2)
-            continue;
-        ans += y * 1ll * (y - 1) / 2;
+    int i = 0;
+    while (i < n - 1) {
+        if (a[i] < 0) {
+            if (a[i] + a[i + 1] < 0) {
+                ans -= a[i] + a[i + 1];
+            } else {
+                break;
+            }
+        } else {
+            break;
+        }
+        i += 2;
     }
-    ll x = f[1] + f[2];
-    ans += x * (x - 1) / 2;
+    while (i < n) {
+        ans += a[i];
+        i++;
+    }
     cout << ans << nl;
 }
 
@@ -55,3 +62,4 @@ int main() {
     }
     return 0;
 }
+

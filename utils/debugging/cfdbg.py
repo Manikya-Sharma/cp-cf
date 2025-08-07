@@ -17,7 +17,7 @@ class bcolors:
 
 
 def compile(input_file, output_file):
-    flags = "-Wall -Wextra -Wconversion -O2 -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector"
+    flags = "-Wall -Wextra -Wconversion -O2 -Wshadow -Wfloat-equal -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -fuse-ld=mold"
     local = "-DLOCAL"
     status = os.system(f"g++ {flags} {local} -g -o {output_file} {input_file}")
     if status == 0:

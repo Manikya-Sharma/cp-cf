@@ -1,5 +1,5 @@
-/* *** PROBLEM: 1899_d_yarik_and_musical_notes
-ON: 2025-04-22
+/* *** PROBLEM: 1746_c_permutation_operations
+ON: 2025-08-03
 BY: Manikya
 *** */
 
@@ -30,19 +30,18 @@ void solution_fn() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> f;
-    for (auto& elem : a) {
-        f[elem]++;
+    vector<int> pos(n);
+    for (int i = 0; i < n; i++) {
+        pos[a[i] - 1] = i;
     }
-    ll ans = 0;
-    for (auto& [x, y] : f) {
-        if (x == 1 || x == 2)
-            continue;
-        ans += y * 1ll * (y - 1) / 2;
+    for (int i = 0; i < n; i++) {
+        if (pos[i] == n - 1) {
+            cout << 1;
+        } else {
+            cout << pos[i] + 2;
+        }
+        cout << " \n"[i == n - 1];
     }
-    ll x = f[1] + f[2];
-    ans += x * (x - 1) / 2;
-    cout << ans << nl;
 }
 
 int main() {
@@ -55,3 +54,4 @@ int main() {
     }
     return 0;
 }
+

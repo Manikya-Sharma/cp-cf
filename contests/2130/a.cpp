@@ -1,5 +1,5 @@
-/* *** PROBLEM: 1899_d_yarik_and_musical_notes
-ON: 2025-04-22
+/* *** PROBLEM: 2130_a_submission_is_all_you_need
+ON: 2025-07-31
 BY: Manikya
 *** */
 
@@ -30,18 +30,12 @@ void solution_fn() {
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    map<int, int> f;
-    for (auto& elem : a) {
-        f[elem]++;
+    int ans = accumulate(a.begin(), a.end(), 0);
+    for (auto &elem : a) {
+        if (elem == 0) {
+            ans++;
+        }
     }
-    ll ans = 0;
-    for (auto& [x, y] : f) {
-        if (x == 1 || x == 2)
-            continue;
-        ans += y * 1ll * (y - 1) / 2;
-    }
-    ll x = f[1] + f[2];
-    ans += x * (x - 1) / 2;
     cout << ans << nl;
 }
 

@@ -1,5 +1,5 @@
 /* *** PROBLEM: 1717_c_madoka_and_formal_statement
-ON: 2025-04-15
+ON: 2025-08-02
 BY: Manikya
 *** */
 
@@ -38,9 +38,9 @@ void solution_fn() {
             cout << "NO" << nl;
             return;
         }
-    }
-    for (int i = 0; i < n - 1; i++) {
-        if (b[i] > 1 + b[i + 1]) {
+        if (a[i] == b[i])
+            continue;
+        if (b[(i + 1) % n] < b[i] - 1) {
             cout << "NO" << nl;
             return;
         }
@@ -58,4 +58,3 @@ int main() {
     }
     return 0;
 }
-
